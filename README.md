@@ -10,7 +10,7 @@ This is the boilerplate code for the Timestamp Microservice project. Instruction
 ## Get Started
 - Clone repository
 ```
-git clone "url"
+git clone https://github.com/carloscabir/fcc-project-timestamp-nodejs
 ```
 
 - Move to project 
