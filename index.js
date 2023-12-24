@@ -30,15 +30,16 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?", (req, res) => {
   let { date } = req.params
-  const isYMDRegex = /\d\d\d\d-\d\d-\d\d/.test(date)
 
-  if (!isYMDRegex) date = parseInt(date)
+  if (!date) date = new Date().getTime().toString()
 
-  const ISODate = new Date(date)
+  if (!Date.parse(date) && !Date.parse(new Date(parseInt(date)))) return res.json({ error: "Invalid Date" })
+
+  const isDate = Date.parse(date) ? Date.parse(date) : Date.parse(new Date(parseInt(date))) 
 
   const response = {
-    unix: new Date(ISODate).getTime(),
-    utc: new Date(ISODate).toUTCString()
+    unix: isDate,
+    utc: new Date(isDate).toUTCString()
   }
   
   res.json(response)
